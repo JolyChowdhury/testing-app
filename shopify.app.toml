@@ -1,0 +1,29 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "5f3a9d3e191c39b795fe37ef5db432e5"
+name = "Testing App"
+handle = "testing-app-722"
+application_url = "https://andorra-plymouth-december-liberia.trycloudflare.com"
+embedded = true
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "jolychowdhury.myshopify.com"
+include_config_on_deploy = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products"
+
+[auth]
+redirect_urls = [
+  "https://andorra-plymouth-december-liberia.trycloudflare.com/auth/callback",
+  "https://andorra-plymouth-december-liberia.trycloudflare.com/auth/shopify/callback",
+  "https://andorra-plymouth-december-liberia.trycloudflare.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-04"
+
+[pos]
+embedded = false
