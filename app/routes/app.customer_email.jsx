@@ -15,60 +15,7 @@ import {
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { EmailIcon } from "@shopify/polaris-icons";
-
-const SwitchButton = ({ initialValue = false, onChange, onClick  }) => {
-  const [active, setActive] = useState(initialValue);
-
-  const handleToggle = (event) => {
-    event.stopPropagation();
-    const newState = !active;
-    setActive(newState);
-    if (onChange) {
-      onChange(newState);
-    }
-    if (onClick) {
-      onClick(event);
-    }
-  };
-
-  return (
-    <div
-      role="switch"
-      aria-checked={active}
-      onClick={handleToggle}
-      style={{
-        display: "inline-block",
-        width: "50px",
-        height: "25px",
-        background: active ? "#303030" : "#ccc",
-        borderRadius: "25px",
-        position: "relative",
-        cursor: "pointer",
-        marginLeft: "10px",
-      }}
-    >
-      <div
-        style={{
-          position: "absolute",
-          top: "2px",
-          left: active ? "26px" : "2px",
-          width: "21px",
-          height: "21px",
-          background: "#fff",
-          borderRadius: "50%",
-          transition: "left 0.2s",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: "10px",
-          color: active ? "#303030" : "#ccc",
-        }}
-      >
-        {active ? "On" : "Off"}
-      </div>
-    </div>
-  );
-};
+import SwitchButton from "../componant/switch";
 
 export default function CustomerEmailPage() {
   const navigate = useNavigate();
@@ -110,17 +57,17 @@ export default function CustomerEmailPage() {
           {
             id: "100",
             url: "/app/points_earned_email",
-            name: "Points earned",
+            name: "Points earned email",
           },
           {
             id: "200",
             url: "#",
-            name: "Reward redeemed",
+            name: "Reward redeemed email",
           },
           {
             id: "300",
             url: "#",
-            name: "Birthday reward",
+            name: "Birthday reward email",
           },
         ]}
         renderItem={(item) => {
@@ -137,7 +84,11 @@ export default function CustomerEmailPage() {
                 <Text variant="bodyMd" fontWeight="bold" as="h3">
                   {name}
                 </Text>
-                <SwitchButton onChange={(isActive) => handleSwitchChange(name, isActive)} onClick={(event) => event.stopPropagation()} />
+                <SwitchButton
+                  onChange={(isActive) => handleSwitchChange(name, isActive)}
+                  onClick={(event) => event.stopPropagation()}
+                  showText={true}
+                />
               </div>
             </ResourceItem>
           );
@@ -174,7 +125,10 @@ export default function CustomerEmailPage() {
                 <Text variant="bodyMd" fontWeight="bold" as="h3">
                   {name}
                 </Text>
-                <SwitchButton onChange={(isActive) => handleSwitchChange(name, isActive)} onClick={(event) => event.stopPropagation()} />
+                <SwitchButton
+                  onChange={(isActive) => handleSwitchChange(name, isActive)}
+                  onClick={(event) => event.stopPropagation()}
+                />
               </div>
             </ResourceItem>
           );
@@ -206,7 +160,10 @@ export default function CustomerEmailPage() {
                 <Text variant="bodyMd" fontWeight="bold" as="h3">
                   {name}
                 </Text>
-                <SwitchButton onChange={(isActive) => handleSwitchChange(name, isActive)} onClick={(event) => event.stopPropagation()} />
+                <SwitchButton
+                  onChange={(isActive) => handleSwitchChange(name, isActive)}
+                  onClick={(event) => event.stopPropagation()}
+                />
               </div>
             </ResourceItem>
           );
@@ -238,7 +195,10 @@ export default function CustomerEmailPage() {
                 <Text variant="bodyMd" fontWeight="bold" as="h3">
                   {name}
                 </Text>
-                <SwitchButton onChange={(isActive) => handleSwitchChange(name, isActive)} onClick={(event) => event.stopPropagation()} />
+                <SwitchButton
+                  onChange={(isActive) => handleSwitchChange(name, isActive)}
+                  onClick={(event) => event.stopPropagation()}
+                />
               </div>
             </ResourceItem>
           );

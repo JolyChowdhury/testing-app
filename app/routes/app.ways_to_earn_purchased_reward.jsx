@@ -22,66 +22,11 @@ import {
   PlusCircleIcon,
 } from "@shopify/polaris-icons";
 import { useLoaderData, useActionData, Form } from "@remix-run/react";
-import { authenticate } from "../shopify.server";
-import { json } from "@remix-run/node";
-import { settingsType } from "../enum/settings_type";
+import TabsComponent from '../componant/TabsComponent';
 import { Modal, TitleBar, useAppBridge } from '@shopify/app-bridge-react';
-import { merchantSettingSave, merchantSettingUpdate, getMerchantSettings } from "../service/settings";
-
-export async function loader({ request }) {
-  const { admin, session } = await authenticate.admin(request);
-  const { shop } = session;
-
-  const purchasePointSettings = await getMerchantSettings(shop, settingsType.PURCHASE_RULES);
-
-  return json(purchasePointSettings);
-}
-
-export async function action({ request }) {
-  const { admin, session } = await authenticate.admin(request);
-  const { shop } = session;
-
-  // updates persistent data
-  let submitData = await request.formData();
-  submitData = Object.fromEntries(submitData);
-
-  let errors = {};
-  if (!submitData.purchasePoint) errors.points = "Points is required";
-
-  if (Object.keys(errors).length) {
-    return { errors };
-  }
-
-  let rewardSettingsData = {
-    shopId: shop,
-    type: settingsType.PURCHASE_RULES,
-    configs: {
-      purchase_reward_type: submitData.prchRewardType,
-      purchase_points: submitData.purchasePoint,
-    },
-  };
-
-  if (submitData.purchaseRewardName) {
-    rewardSettingsData.configs.purchase_reward_name = submitData.purchaseRewardName;
-  }
-
-  let purchaseRewardRule;
-
-  // Step: 1 check sing up data
-  const checkPurchaseRewardRecord = await getMerchantSettings(shop, settingsType.PURCHASE_RULES);
-
-  if (checkPurchaseRewardRecord) {
-    // Step: 2 if exists then update
-    purchaseRewardRule = await merchantSettingUpdate(checkPurchaseRewardRecord.id, rewardSettingsData);
-  } else {
-    // Step: 3 if not exists then create
-    purchaseRewardRule = await merchantSettingSave(rewardSettingsData);
-  }
-
-  return { success: true };
-}
 
 export default function purchaseRewardRule() {
+  
   const OpenPurchaseModal = useAppBridge();
   const SetPurchaseName = () => {
     OpenPurchaseModal.modal.show('my-modal');
@@ -90,6 +35,10 @@ export default function purchaseRewardRule() {
 
   const navigate = useNavigate();
   // popup content
+  const [tabsVisible, setTabsVisible] = useState(false);
+  const toggleTabsVisibility = () => {
+    setTabsVisible(!tabsVisible);
+  };
   const prchRewaredRuleSettings = useLoaderData();
   const formValidationError = useActionData();
   const [formErrors, setFormErrors] = useState({});
@@ -121,9 +70,6 @@ export default function purchaseRewardRule() {
   );
 
   const [modalActive, setModalActive] = useState(false);
-  const handleModalToggle = () => {
-    setModalActive(!modalActive);
-  };
   const [popoverActive, setPopoverActive] = useState(false);
   const togglePopoverActive = useCallback(
     () => setPopoverActive((popoverActive) => !popoverActive),
@@ -135,44 +81,6 @@ export default function purchaseRewardRule() {
     </Button>
   );
 
-  const [Tabselected, setSelectedTab] = useState(0);
-  const handleTabChange = useCallback(
-    (selectedTabIndex) => {
-      setSelectedTab(selectedTabIndex);
-      switch (selectedTabIndex) {
-        case 0:
-          navigate("/app/reward");
-          break;
-        case 1:
-          navigate("/app/ways-to-redeem");
-          break;
-        case 2:
-          navigate("/app/point_rules");
-          break;
-        case 3:
-          navigate("/app/activity");
-          break;
-        default:
-          break;
-      }
-    },
-    [navigate],
-  );
-
-  const tabs = [
-    { id: "reward", content: "Ways to earn points" },
-    {
-      id: "ways-to-redeem",
-      content: "Ways to redeem points",
-    },
-    {
-      id: "prospects-1",
-      content: "Point rules",
-    },
-    { id: "activity", content: "Activity" },
-  ];
-
-  const tabContent = [];
 
   const handleBackClick = () => {
     navigate("/app/reward");
@@ -187,9 +95,7 @@ export default function purchaseRewardRule() {
       <Layout>
         <Layout.Section>
           <Card sectioned>
-            <Tabs tabs={tabs} selected={Tabselected} onSelect={handleTabChange}>
-              {tabContent[Tabselected]}
-            </Tabs>
+          <TabsComponent hideContentInitially={true} />
           </Card>
         </Layout.Section>
       </Layout>

@@ -28,6 +28,8 @@ export default function App() {
         <Link to="/app/customer_email">Customer Email</Link>
         <Link to="/app/onboarding_process">Onboarding Process</Link>
         <Link to="/app/branding">Branding</Link>
+        <Link to="/app/design">Design</Link>
+        <Link to="/app/create-dashboard">Create dashboard</Link>
         <Link to="/app/VIP">VIP</Link>
         <Link to="/app/billing">Billing</Link>
         <Link to="/app/testing">Testing</Link>

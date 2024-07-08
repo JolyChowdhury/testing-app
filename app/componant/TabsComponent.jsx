@@ -1,114 +1,338 @@
-import React, { useState, useCallback } from 'react';
-import { Tabs, Button, Text } from '@shopify/polaris';
-import { useNavigate } from 'react-router-dom';
+import { Tabs, Card, Text, Button, AppProvider } from "@shopify/polaris";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import SwitchWithButton from './SwitchWithButton';
 
-const excludeRoutes = ['app/sign_up_program', 'app/signup-program'];
+const tabsData = [
+  { id: "reward", content: "Reward" },
+  { id: "redeem", content: "Redeem" },
+  { id: "activity", content: "Activity" },
+];
 
-function shouldExcludeRoute(currentRoute) {
-  return excludeRoutes.some(route => currentRoute.includes(route));
-}
-
-const TabsComponent = ({ currentRoute, initialSelected }) => {
-  const [selected, setSelected] = useState(initialSelected);
-
-  const [showContent, setShowContent] = useState(!shouldExcludeRoute(currentRoute));
+export default function TabsComponent({ hideContentInitially = true }) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const initialTab = queryParams.get('tab');
+  const initialTabIndex = tabsData.findIndex(tab => tab.id === initialTab);
 
-  const handleTabChange = useCallback((selectedTabIndex) => {
-    const selectedTabId = tabs[selectedTabIndex].id;
-    console.log( selectedTabId);
-    setSelected(selectedTabId);
-    setShowContent(true); 
-  }, []);
+  const [selectedTab, setSelectedTab] = useState(initialTabIndex >= 0 ? initialTabIndex : 0);
+  const [contentVisible, setContentVisible] = useState(!hideContentInitially);
 
-  const handleNavigation = (tabIndex, path) => {
-    navigate(path, { state: { selectedTab: tabIndex } });
+  const handleTabChange = (selectedTabIndex) => {
+    setSelectedTab(selectedTabIndex);
+    const tabId = tabsData[selectedTabIndex].id;
+    navigate(`?tab=${tabId}`);
+    setContentVisible(true); // Show content when a tab is clicked
   };
 
-  const tabs = [
-    { id: "reward", content: "Ways to earn points" },
-    { id: "ways-to-redeem", content: "Ways to redeem points" },
-    { id: "rules", content: "Point rules" },
-    { id: "activity", content: "Activity" },
-    { id: "expire", content: "Points Expiry" },
-  ];
-
-  const tabContent = [
-    <div key="reward">
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginBottom: "20px",
-          marginTop: "20px",
-          borderTop: "1px solid rgb(217, 217, 217)",
-        }}
-      >
-        <div style={{ marginRight: "10px" }}>
-          <Text variant="headingMd" as="h5">Sign Up reward</Text>
-          <Text variant="bodyLg" as="p">Offer a welcome reward upon a user registration</Text>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", marginBottom: "10px", marginTop: "20px" }}>
-          <div style={{ marginRight: "20px" }}>
-            <Button onClick={() => handleNavigation(0, '/app/sign_up_program')}>Edit</Button>
-          </div>
-        </div>
-      </div>
-    </div>,
-    <div key="ways-to-redeem">
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginBottom: "20px",
-          marginTop: "20px",
-          borderTop: "1px solid rgb(217, 217, 217)",
-        }}
-      >
-        <div style={{ marginRight: "10px" }}>
-          <Text variant="headingMd" as="h5">Purchase discount</Text>
-          <Text variant="bodyLg" as="p">e.g (100 points = $1)</Text>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", marginBottom: "10px", marginTop: "20px" }}>
-          <div style={{ marginRight: "20px" }}>
-            <Button onClick={() => handleNavigation(1, '/signup-program')}>Edit</Button>
-          </div>
-        </div>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginBottom: "20px",
-          marginTop: "20px",
-          borderTop: "1px solid rgb(217, 217, 217)",
-        }}
-      >
-        <div style={{ marginRight: "10px" }}>
-          <Text variant="headingMd" as="h5">Free Shipping</Text>
-          <Text variant="bodyLg" as="p">Enjoy free shipping on all orders as a loyalty member</Text>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", marginBottom: "10px", marginTop: "20px" }}>
-          <div style={{ marginRight: "20px" }}>
-            <Button onClick={() => handleNavigation(1, '/signup-program')}>Edit</Button>
-          </div>
-        </div>
-      </div>
-    </div>,
-    <div key="rules"></div>,
-    <div key="activity"></div>,
-    <div key="expire"></div>
-  ];
+  useEffect(() => {
+    if (initialTabIndex >= 0) {
+      setSelectedTab(initialTabIndex);
+    }
+  }, [initialTabIndex]);
 
   return (
-    <Tabs tabs={tabs} selected={selected} onSelect={handleTabChange}>
-      {tabContent[selected]}
-      {/* {showContent && tabContent[selected]} */}
-    </Tabs>
-  );
-};
+    <>
+      <Tabs tabs={tabsData} selected={selectedTab} onSelect={handleTabChange} />
+      {contentVisible && (
+        <div className="tab-content">
+          {/* Render tab content based on selectedTab */}
+          {/* Example: Render content for each tab */}
+          {selectedTab === 0 && (
+            <div key="reward">
+      
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginBottom: "20px",
+                marginTop: "20px",
+                borderTop: "1px solid rgb(217, 217, 217)",
+              }}
+            >
+              <div style={{ marginRight: "10px" }}>
+                <Text variant="headingMd" as="h5">
+                  Rewards on Purchase
+                </Text>
+                <Text variant="bodyLg" as="p">
+                  Offer to give reward points on purchase from the store
+                </Text>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginBottom: "10px",
+                  marginTop: "20px",
+                }}
+              >
+                <div style={{ marginRight: "20px" }}>
+                  <Button onClick={() => navigate("/app/ways_to_earn_purchased_reward")}>Edit</Button>
+                </div>
+                <AppProvider
+                  i18n={{
+                    Polaris: { Common: { checkbox: { on: "On", off: "Off" } } },
+                  }}
+                >
+                  <SwitchWithButton
+                    numberofSwitches={5}
+                    singleSwitchKey="Rewards on Purchase"
+                  />
+                </AppProvider>
+              </div>
+            </div>
+          </div>
+          )}
+          {selectedTab === 1 && (
+            <div key="redeem">
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: "20px",
+          marginTop: "20px",
+          borderTop: "1px solid rgb(217, 217, 217)",
+        }}
+      >
+        <div style={{ marginRight: "10px" }}>
+          <Text variant="headingMd" as="h5">
+            Sign Up reward
+          </Text>
+          <Text variant="bodyLg" as="p">
+            Offer a welcome reward upon a user registration
+          </Text>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            marginBottom: "10px",
+            marginTop: "20px",
+          }}
+        >
+          <div style={{ marginRight: "20px" }}>
+            <Button onClick={() => navigate("/app/sign_up_program")}>Edit</Button>
+          </div>
+          <AppProvider
+            i18n={{
+              Polaris: { Common: { checkbox: { on: "On", off: "Off" } } },
+            }}
+          >
+            <SwitchWithButton
+              numberofSwitches={5}
+              singleSwitchKey="Sign Up reward"
+            />
+          </AppProvider>
+        </div>
+      </div>
+    </div>
+    )}
+    {selectedTab === 2 && (
 
-export default TabsComponent;
+<div key="activity">
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: "20px",
+          marginTop: "20px",
+          borderTop: "1px solid rgb(217, 217, 217)",
+        }}
+      >
+        <div style={{ marginRight: "10px" }}>
+          <Text variant="headingMd" as="h5">
+            Sign Up reward
+          </Text>
+          <Text variant="bodyLg" as="p">
+            Offer a welcome reward upon a user registration
+          </Text>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            marginBottom: "10px",
+            marginTop: "20px",
+          }}
+        >
+          <div style={{ marginRight: "20px" }}>
+            <Button onClick={() => navigate("/app/sign_up_program")}>Edit</Button>
+          </div>
+          <AppProvider
+            i18n={{
+              Polaris: { Common: { checkbox: { on: "On", off: "Off" } } },
+            }}
+          >
+            <SwitchWithButton
+              numberofSwitches={5}
+              singleSwitchKey="Sign Up reward"
+            />
+          </AppProvider>
+        </div>
+      </div>
+    </div>
+    )}
+    </div>
+  )}
+</>
+);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+  {/* const tabContent = [
+    <div key="reward">
+      
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: "20px",
+          marginTop: "20px",
+          borderTop: "1px solid rgb(217, 217, 217)",
+        }}
+      >
+        <div style={{ marginRight: "10px" }}>
+          <Text variant="headingMd" as="h5">
+            Rewards on Purchase
+          </Text>
+          <Text variant="bodyLg" as="p">
+            Offer to give reward points on purchase from the store
+          </Text>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            marginBottom: "10px",
+            marginTop: "20px",
+          }}
+        >
+          <div style={{ marginRight: "20px" }}>
+            <Button onClick={() => navigate("/app/ways_to_earn_purchased_reward")}>Edit</Button>
+          </div>
+          <AppProvider
+            i18n={{
+              Polaris: { Common: { checkbox: { on: "On", off: "Off" } } },
+            }}
+          >
+            <SwitchWithButton
+              numberofSwitches={5}
+              singleSwitchKey="Rewards on Purchase"
+            />
+          </AppProvider>
+        </div>
+      </div>
+    </div>,
+    <div key="redeem">
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: "20px",
+          marginTop: "20px",
+          borderTop: "1px solid rgb(217, 217, 217)",
+        }}
+      >
+        <div style={{ marginRight: "10px" }}>
+          <Text variant="headingMd" as="h5">
+            Sign Up reward
+          </Text>
+          <Text variant="bodyLg" as="p">
+            Offer a welcome reward upon a user registration
+          </Text>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            marginBottom: "10px",
+            marginTop: "20px",
+          }}
+        >
+          <div style={{ marginRight: "20px" }}>
+            <Button onClick={() => navigate("/app/sign_up_program")}>Edit</Button>
+          </div>
+          <AppProvider
+            i18n={{
+              Polaris: { Common: { checkbox: { on: "On", off: "Off" } } },
+            }}
+          >
+            <SwitchWithButton
+              numberofSwitches={5}
+              singleSwitchKey="Sign Up reward"
+            />
+          </AppProvider>
+        </div>
+      </div>
+    </div>,
+    <div key="activity">
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: "20px",
+          marginTop: "20px",
+          borderTop: "1px solid rgb(217, 217, 217)",
+        }}
+      >
+        <div style={{ marginRight: "10px" }}>
+          <Text variant="headingMd" as="h5">
+            Sign Up reward
+          </Text>
+          <Text variant="bodyLg" as="p">
+            Offer a welcome reward upon a user registration
+          </Text>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            marginBottom: "10px",
+            marginTop: "20px",
+          }}
+        >
+          <div style={{ marginRight: "20px" }}>
+            <Button onClick={() => navigate("/app/sign_up_program")}>Edit</Button>
+          </div>
+          <AppProvider
+            i18n={{
+              Polaris: { Common: { checkbox: { on: "On", off: "Off" } } },
+            }}
+          >
+            <SwitchWithButton
+              numberofSwitches={5}
+              singleSwitchKey="Sign Up reward"
+            />
+          </AppProvider>
+        </div>
+      </div>
+    </div>
+  ]; */}
+
+  {/* return (
+    <>
+      <Tabs tabs={tabsData} selected={selectedTab} onSelect={handleTabChange} />
+      <Card sectioned>
+        {tabContent[selectedTab]}
+      </Card>
+    </>
+  );
+} */}

@@ -1,21 +1,24 @@
 import React, { useState } from 'react';
-import {  Text} from '@shopify/polaris';
+import { Text } from '@shopify/polaris';
 
-const SwitchButton = ({ label, initialValue = false, onChange }) => {
+const SwitchButton = ({ label, initialValue = false, onChange, onClick, showText = true  }) => {
   const [active, setActive] = useState(initialValue);
 
-  const handleToggle = () => {
-    setActive(prevState => !prevState);
+  const handleToggle = (event) => {
+    event.stopPropagation();
+    const newState = !active;
+    setActive(newState);
     if (onChange) {
-      onChange(!active);
+      onChange(newState);
+    }
+    if (onClick) {
+      onClick(event);
     }
   };
 
   return (
     <div style={{ display: 'flex', alignItems: 'center' }}>
-      <div style={{ marginRight: '10px' }}>
-        <Text>{label}</Text>
-      </div>
+      {label && <div style={{ marginRight: '10px' }}><Text>{label}</Text></div>}
       <div
         role="switch"
         aria-checked={active}
@@ -24,7 +27,7 @@ const SwitchButton = ({ label, initialValue = false, onChange }) => {
           display: 'inline-block',
           width: '50px',
           height: '25px',
-          background: active ? '#4caf50' : '#ccc',
+          background: active ? '#303030' : '#ccc',
           borderRadius: '25px',
           position: 'relative',
           cursor: 'pointer',
@@ -45,13 +48,14 @@ const SwitchButton = ({ label, initialValue = false, onChange }) => {
             alignItems: 'center',
             justifyContent: 'center',
             fontSize: '10px',
-            color: active ? '#4caf50' : '#ccc',
+            color: active ? '#303030' : '#ccc',
           }}
         >
-          {/* {active ? 'On' : 'Off'} */}
+          {showText && (active ? 'On' : 'Off')}
         </div>
       </div>
     </div>
   );
 };
+
 export default SwitchButton;
