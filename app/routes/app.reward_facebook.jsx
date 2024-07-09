@@ -27,76 +27,76 @@ import { settingsType } from "../enum/settings_type";
 import { json } from "@remix-run/node";
 import {Modal, TitleBar, useAppBridge} from '@shopify/app-bridge-react';
 
-export async function loader({ request }) {
-  const { admin, session } = await authenticate.admin(request);
-  const { id } = session;
+// export async function loader({ request }) {
+//   const { admin, session } = await authenticate.admin(request);
+//   const { id } = session;
 
-  const facebookShareSettings = await db.Settings.findFirst({
-    where: {
-      shopId: id,
-      type: settingsType.FACEBOOK_LIKE,
-    },
-  });
+//   const facebookShareSettings = await db.Settings.findFirst({
+//     where: {
+//       shopId: id,
+//       type: settingsType.FACEBOOK_LIKE,
+//     },
+//   });
 
-  return json(facebookShareSettings);
-}
+//   return json(facebookShareSettings);
+// }
 
-export async function action({ request }) {
-  const { admin, session } = await authenticate.admin(request);
-  const { id } = session;
+// export async function action({ request }) {
+//   const { admin, session } = await authenticate.admin(request);
+//   const { id } = session;
 
-  // updates persistent data
-  let submitData = await request.formData();
-  submitData = Object.fromEntries(submitData);
+//   // updates persistent data
+//   let submitData = await request.formData();
+//   submitData = Object.fromEntries(submitData);
 
-  let errors = {};
-  if (!submitData.fbPageUrl) errors.fbPageUrl = "Facebook page url is required";
-  if (!submitData.fbLikeReward) errors.fbLikeReward = "Facebook page reward is required";
+//   let errors = {};
+//   if (!submitData.fbPageUrl) errors.fbPageUrl = "Facebook page url is required";
+//   if (!submitData.fbLikeReward) errors.fbLikeReward = "Facebook page reward is required";
 
-  if (Object.keys(errors).length) {
-    return { errors };
-  }
+//   if (Object.keys(errors).length) {
+//     return { errors };
+//   }
 
-  let fbRewardSettingsData = {
-    shopId: id,
-    type: settingsType.FACEBOOK_LIKE,
-    configs: {
-      fb_page_url: submitData.fbPageUrl,
-      reward_points: submitData.fbLikeReward,
-    },
-  };
+//   let fbRewardSettingsData = {
+//     shopId: id,
+//     type: settingsType.FACEBOOK_LIKE,
+//     configs: {
+//       fb_page_url: submitData.fbPageUrl,
+//       reward_points: submitData.fbLikeReward,
+//     },
+//   };
 
-  if (submitData.fbRewardName) {
-    fbRewardSettingsData.configs.redeem_name = submitData.fbRewardName;
-  }
+//   if (submitData.fbRewardName) {
+//     fbRewardSettingsData.configs.redeem_name = submitData.fbRewardName;
+//   }
 
-  let fbSettings;
+//   let fbSettings;
 
-  // Step: 1 check sing up data
-  const checkSignUpRecord = await db.Settings.findFirst({
-    where: {
-      shopId: id,
-      type: settingsType.FACEBOOK_LIKE,
-    },
-  });
+//   // Step: 1 check sing up data
+//   const checkSignUpRecord = await db.Settings.findFirst({
+//     where: {
+//       shopId: id,
+//       type: settingsType.FACEBOOK_LIKE,
+//     },
+//   });
 
-  if (checkSignUpRecord) {
-    // Step: 2 if exists then update
-    fbSettings = await db.Settings.update({
-      where: {
-        id: checkSignUpRecord.id,
-      },
-      data: fbRewardSettingsData,
-    });
-  } else {
-    // Step: 3 if not exists then create
-    fbSettings = await db.Settings.create({
-      data: fbRewardSettingsData,
-    });
-  }
+//   if (checkSignUpRecord) {
+//     // Step: 2 if exists then update
+//     fbSettings = await db.Settings.update({
+//       where: {
+//         id: checkSignUpRecord.id,
+//       },
+//       data: fbRewardSettingsData,
+//     });
+//   } else {
+//     // Step: 3 if not exists then create
+//     fbSettings = await db.Settings.create({
+//       data: fbRewardSettingsData,
+//     });
+//   }
 
-  return { success: true };
-}
+//   return { success: true };
+// }
 
 export default function PageFacebookLikeReward() {
   const navigate = useNavigate();

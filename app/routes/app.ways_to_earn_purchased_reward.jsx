@@ -9,36 +9,24 @@ import {
   ActionList,
   Icon,
   Card,
-  Tabs,
   ChoiceList,
   List,
-  Banner
+  Banner,
 } from "@shopify/polaris";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useCallback, useEffect } from "react";
-import {
-  ArrowLeftIcon,
-  EditIcon,
-  PlusCircleIcon,
-} from "@shopify/polaris-icons";
+import { ArrowLeftIcon, EditIcon, PlusCircleIcon } from "@shopify/polaris-icons";
 import { useLoaderData, useActionData, Form } from "@remix-run/react";
 import TabsComponent from '../componant/TabsComponent';
 import { Modal, TitleBar, useAppBridge } from '@shopify/app-bridge-react';
 
-export default function purchaseRewardRule() {
-  
+export default function WaysToEarnPurchasedReward() {
   const OpenPurchaseModal = useAppBridge();
   const SetPurchaseName = () => {
     OpenPurchaseModal.modal.show('my-modal');
   };
 
-
   const navigate = useNavigate();
-  // popup content
-  const [tabsVisible, setTabsVisible] = useState(false);
-  const toggleTabsVisibility = () => {
-    setTabsVisible(!tabsVisible);
-  };
   const prchRewaredRuleSettings = useLoaderData();
   const formValidationError = useActionData();
   const [formErrors, setFormErrors] = useState({});
@@ -52,7 +40,7 @@ export default function purchaseRewardRule() {
   const [prchRewardType, setPrchRewardType] = useState(["each"]);
   const handlePrchRewardTypeChange = useCallback(
     (value) => setPrchRewardType(value),
-    [],
+    []
   );
 
   const [purchasePoint, setPurchasePoint] = useState(
@@ -60,20 +48,20 @@ export default function purchaseRewardRule() {
   );
   const handlePointChange = useCallback(
     (newValue) => setPurchasePoint(newValue),
-    [],
+    []
   );
 
   const [purchaseRewardName, setPurchaseRewardName] = useState("");
   const handlePurchaseRewardNameChange = useCallback(
     (newModalValue) => setPurchaseRewardName(newModalValue),
-    [],
+    []
   );
 
   const [modalActive, setModalActive] = useState(false);
   const [popoverActive, setPopoverActive] = useState(false);
   const togglePopoverActive = useCallback(
     () => setPopoverActive((popoverActive) => !popoverActive),
-    [],
+    []
   );
   const activator = (
     <Button onClick={togglePopoverActive} disclosure>
@@ -81,9 +69,8 @@ export default function purchaseRewardRule() {
     </Button>
   );
 
-
   const handleBackClick = () => {
-    navigate("/app/reward");
+    navigate("/app/reward?tab=reward");
   };
 
   return (
@@ -94,9 +81,7 @@ export default function purchaseRewardRule() {
     >
       <Layout>
         <Layout.Section>
-          <Card sectioned>
-          <TabsComponent hideContentInitially={true} />
-          </Card>
+            <TabsComponent hideContentInitially={true} />
         </Layout.Section>
       </Layout>
       <Layout>
@@ -114,11 +99,7 @@ export default function purchaseRewardRule() {
                     }}
                   >
                     <div style={{ display: "flex", alignItems: "center" }}>
-                      <Button
-                        plain
-                        icon={ArrowLeftIcon}
-                        onClick={handleBackClick}
-                      />
+                      <Button plain icon={ArrowLeftIcon} onClick={handleBackClick} />
                       <div style={{ marginLeft: "10px" }}>
                         <Text variant="headingLg" as="h3">
                           Rewards on Purchase
@@ -164,7 +145,14 @@ export default function purchaseRewardRule() {
                             <button variant="primary">Save</button>
                             <button>Cancel</button>
                           </TitleBar>
-                          <div style={{ paddingBottom: "25px", paddingLeft: "15px", paddingRight: "15px", paddingTop: "15px" }}>
+                          <div
+                            style={{
+                              paddingBottom: "25px",
+                              paddingLeft: "15px",
+                              paddingRight: "15px",
+                              paddingTop: "15px",
+                            }}
+                          >
                             <TextField
                               label="Rewards name"
                               value={purchaseRewardName}
@@ -240,7 +228,7 @@ export default function purchaseRewardRule() {
                 }}
               >
                 <Text variant="headingLg" as="h3">
-                  Summery
+                  Summary
                 </Text>
                 <Popover
                   active={popoverActive}

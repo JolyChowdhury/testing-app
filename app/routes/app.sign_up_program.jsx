@@ -1,60 +1,17 @@
 // SignUpProgram.jsx
-import { Page, Button, Layout, Text } from "@shopify/polaris";
+import { Page, Button, Layout, Card, Form, BlockStack, Text } from "@shopify/polaris";
 import { ArrowLeftIcon } from "@shopify/polaris-icons";
 import { useNavigate } from "react-router-dom";
 import TabsComponent from '../componant/TabsComponent';
-import { tabsData } from '../componant/tabsdata';
 
 export default function SignUpProgram() {
   const navigate = useNavigate();
 
-  const goBack = () => {
+  const handleBackClick  = () => {
     navigate('/app/reward');
   };
 
-  const defaultTabContent = (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        marginBottom: "20px",
-        marginTop: "20px",
-        borderTop: "1px solid rgb(217, 217, 217)",
-      }}
-    >
-      <div style={{ marginRight: "10px" }}>
-        <Text variant="headingMd" as="h5">
-          Sign Up reward
-        </Text>
-        <Text variant="bodyLg" as="p">
-          Offer a welcome reward upon a user registration
-        </Text>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          marginBottom: "10px",
-          marginTop: "20px",
-        }}
-      >
-        <div style={{ marginRight: "20px" }}>
-          <Button onClick={() => {}}>Edit</Button>
-        </div>
-        <AppProvider
-          i18n={{
-            Polaris: { Common: { checkbox: { on: "On", off: "Off" } } },
-          }}
-        >
-          <SwitchWithButton
-            numberofSwitches={5}
-            singleSwitchKey="Sign Up reward"
-          />
-        </AppProvider>
-      </div>
-    </div>
-  );
+  
 
   return (
     <Page
@@ -64,8 +21,35 @@ export default function SignUpProgram() {
     >
       <Layout>
         <Layout.Section>
-          <Button plain icon={ArrowLeftIcon} onClick={goBack}>Back</Button>
-          <TabsComponent tabsData={tabsData} defaultTabContent={defaultTabContent} />
+        <TabsComponent hideContentInitially={true} />
+        </Layout.Section>
+        <Layout.Section>
+          <Card sectioned>
+            <Form method="POST">
+              <div style={{ marginBottom: "20px" }}>
+                <BlockStack gap={{ xs: "800", sm: "400" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      marginBottom: "10px",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <Button plain icon={ArrowLeftIcon} onClick={handleBackClick} />
+                      <div style={{ marginLeft: "10px" }}>
+                        <Text variant="headingLg" as="h3">
+                          Rewards on Purchase
+                        </Text>
+                      </div>
+                    </div>
+                    <Button submit>Create</Button>
+                  </div>
+                </BlockStack>
+              </div>
+            </Form>
+          </Card>
         </Layout.Section>
       </Layout>
     </Page>
