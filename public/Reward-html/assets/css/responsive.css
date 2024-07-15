@@ -1,0 +1,206 @@
+/*-------------------------
+   Responsive Styles
+-------------------------*/
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .mainmenu li {
+        margin-right: 18px;
+    }
+    
+    .banner-content::after {
+        bottom: 42%;
+        left: 50%;
+    }
+
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .mainmenu li {
+        margin-right: 18px;
+    }
+    
+    .banner-content::after {
+        bottom: 42%;
+        left: 50%;
+    }
+
+    .earn-reward .Loyalty-title p {
+        margin: 12px 0 40px;
+    }
+
+    .footer-input::placeholder,
+    .footer-btn {
+        font-size: 12px;
+    }
+
+
+}
+
+@media (max-width: 991px) {
+    .mainmenu li a {
+        font-size: 14px;
+    }
+
+    .mainmenu li {
+        margin-right: 18px;
+    }
+
+    .banner-content {
+        margin-top: 24px;
+        text-align: center;
+    }
+
+    .banner-content h1,
+    .banner-content h1 span{
+        font-size: 38px;
+    }
+
+    .banner-content::after {
+       display: none;
+    }
+
+    .section-padding {
+        padding: 80px 0;
+    }
+
+    .reward-section-title {
+        font-size: 32px;
+    }
+
+    .earn-reward .Loyalty-title p {
+        margin: 12px 0 40px;
+    }
+
+    .reward-point-circle {
+        margin: 0 15px 0;
+    }
+    .footer-col {
+        margin-bottom: 24px;
+    }
+
+    .footer-bottom-svg svg,
+    .footer-bottom-another-svg svg {
+        bottom: 0;
+    }
+
+    .earning-next::after {
+        left: -5%;
+    }
+
+    .earning-next::before {
+        right: -5%;
+    }
+}
+
+@media (max-width: 767px) {
+    .header-middle-content .logo-text a {
+        font-size: 24px;
+    }
+
+    .banner-bottom-article {
+        margin: 50px auto 0;
+        padding: 22px;
+    }
+
+    .banner-content p {
+        font-size: 18px;
+    }
+
+    .banner-bottom-article h5 {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .earn-reward .Loyalty-title p {
+        margin: 12px 0;
+    }
+
+    .earning-details {
+        margin-top: 24px;
+    }
+
+    .reward-point-number p {
+        font-size: 12px;
+    }
+
+    .earn-reward-point {
+        margin: 20px 0;
+        justify-content: space-between !important;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .position-top, .position-bottom {
+        position: unset;
+    }
+
+    .reward-point-circle {
+        margin-bottom: 24px;
+    }
+    
+    .faq-img {
+        text-align: center;
+    }
+
+    .earning-next::after {
+        left: 0%;
+    }
+    
+    .earning-next::before {
+        right: 0%;
+    }
+
+}
+
+@media (max-width: 575px) {
+    .middle-right-icon .contact-information li {
+        margin-right: 24px;
+    }
+    .menu-area {
+        flex-direction: column;
+    }
+    
+    .header-search {
+        margin-top: 24px;
+    }
+
+    .reward-section-title {
+        font-size: 28px;
+    }
+
+    .reward-large-circle {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+@media (max-width: 500px) {
+    .earn-reward-point {
+        justify-content: center !important;
+    }
+
+    .points-info {
+        padding: 16px;
+        margin-top: 24px;
+    }
+
+    .redeem-para {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 400px) {
+    .middle-right-icon .contact-information li {
+        margin-right: 12px;
+    }
+
+    .header-middle-content .logo-text a {
+        font-size: 18px;
+    }
+
+    .middle-right-icon .contact-information li a span {
+        color: #616161;
+        margin-left: 0px;
+    }
+
+
+}
