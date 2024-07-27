@@ -1,0 +1,313 @@
+/*-------------------------
+   Responsive Styles
+-------------------------*/
+@media (min-width: 992px) and (max-width: 1199px) {
+    .join-card {
+        width: 250px;
+    }
+
+    .sign-input {
+        width: 360px;
+    }
+
+    .sign-up-input button {
+        width: 200px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1024px) {
+    .sign-input {
+        width: 320px;
+    }
+
+    .perks-table {
+        font-size: 12px;
+    }
+      
+    .tab-head {
+    width: 150px;
+    height: 34px;
+    }
+
+    .tab {
+    width: 140px;
+    height: 34px;
+    line-height: 34px;
+    }
+
+    .perks-table th, .perks-table td {
+    padding: 16px;
+    }
+    
+}
+
+@media (max-width: 991px) {
+    .join-card {
+        width: 210px;
+    }
+
+    .banner-content h2 {
+        font-size: 32px;
+    }
+
+    .banner-content p {
+        font-size: 14px;
+    }
+
+    .earning-details {
+        margin-bottom: 20px;
+    }
+
+    .section-padding {
+        padding: 60px 0;
+    }
+
+    .earn-reward {
+        margin-top: 100px;
+        margin-bottom: 0;
+    }
+
+    .Loyalty-title h2 {
+        margin-bottom: 50px;
+    }
+
+    .perks-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    .perks-table th, .perks-table td {
+    padding: 14px;
+    }
+
+    .newsletter h5 {
+        font-size: 22px;
+    }
+
+    .sign-up-input button {
+        width: 155px;
+        padding: 13px 10px;
+        font-size: 20px;
+    }
+
+    .sign-input {
+        width: 250px;
+    }
+
+}
+
+@media (max-width: 767px) {
+    .join-card {
+        width: 150px;
+        margin-right: 20px;
+    }
+
+    .logo-text a {
+        font-size: 16px;
+    }
+
+    .join-card h1 {
+        font-size: 36px;
+    }
+
+    .join-card h4 {
+        font-size: 16px;
+    }
+
+    .join-card p {
+        font-size: 12px;
+    }
+
+    .reward-section-blue-title {
+        font-size: 32px;
+    }
+
+    .reward-section-title {
+        font-size: 32px;
+    }
+
+    .redeem-para {
+        font-size: 14px;
+    }
+
+    .points-info {
+        padding: 16px 30px;
+    }
+   
+    .faq-article ul li::after {
+        width: 70%;
+    }
+
+    .contact-info {
+        margin-bottom: 40px;
+    }
+
+    .newsletter {
+        text-align: center;
+    }
+
+    .sign-up-title {
+        justify-content: center;
+    }
+
+    .sign-up-input {
+        margin-top: 20px;
+        margin-right: 100px;
+    }
+
+    .footer-col {
+        margin-bottom: 40px;
+    }
+
+    .col3  {
+        margin-bottom: 0;
+    }
+
+    .footer-text {
+        padding: 12px 0;
+    }
+    
+    .footer-copyright p {
+        font-size: 14px;
+    }
+
+    .footer-social .social-menu li {
+        margin-right: 12px;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 575px) {
+    .join-card {
+        width: 150px;
+        margin-right: 20px;
+    }
+
+    .logo-text a {
+        font-size: 16px;
+    }
+
+    .join-card h1 {
+        font-size: 36px;
+    }
+
+    .join-card h4 {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 500px) {
+   .header-img img {
+    width: 100px;
+    height: auto;
+   }
+
+   .join-card {
+    width: 120px;
+    margin-right: 10px;
+    padding: 20px 10px 5px;
+    }
+
+    .logo-text a {
+        font-size: 12px;
+    }
+
+    .join-card h1 {
+        font-size: 30px;
+    }
+
+    .join-card h4 {
+        font-size: 12px;
+    }
+
+    .banner-content h2 {
+        font-size: 28px;
+    }
+
+    .sign-input {
+        width: 250px;
+    }
+
+    .sign-up-input {
+        margin-right: 130px;
+    }
+
+    .newsletter h5 {
+        margin-left: 5px;
+    }
+
+    .sign-up-input button {
+        width: 130px;
+        padding: 15px 10px;
+        font-size: 16px;
+    }
+
+    .footer-bottom-article {
+        flex-direction: column-reverse;
+    }
+
+    .footer-copyright {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 400px) {
+    .logo-text a {
+        font-size: 14px;
+    }
+    .mainmenu li a {
+        font-size: 12px;
+    }
+    .top-right-icon .contact-information li {
+        margin-right: 12px;
+    }
+    .header-img img {
+        width: 80px;
+        height: auto;
+    }
+
+    .join-card {
+        width: 100px;
+    }
+
+    .banner-content p {
+        font-size: 12px;
+    }
+
+    .banner-content h2 {
+        font-size: 26px;
+    }
+
+    .sign-input {
+        width: 200px;
+        padding: 15px 2px 15px 10px;
+    }
+
+    .sign-up-input button {
+        width: 110px;
+    }
+    
+}
+
+@media (max-width: 350px) {
+    .join-card {
+        width: 90px;
+    }
+
+    .header-logo a img {
+        width: 100px;
+        height: auto;
+    }
+
+    .sign-input {
+        width: 170px;
+    }
+
+    .sign-up-input button {
+        width: 100px;
+        padding: 16px 10px;
+        font-size: 13px;
+    }
+}
