@@ -3,7 +3,7 @@
 client_id = "5f3a9d3e191c39b795fe37ef5db432e5"
 name = "Testing App"
 handle = "testing-app-722"
-application_url = "https://cope-freebsd-advocate-exhibits.trycloudflare.com"
+application_url = "https://decent-recognize-solid-jose.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://cope-freebsd-advocate-exhibits.trycloudflare.com/auth/callback",
-  "https://cope-freebsd-advocate-exhibits.trycloudflare.com/auth/shopify/callback",
-  "https://cope-freebsd-advocate-exhibits.trycloudflare.com/api/auth/callback"
+  "https://decent-recognize-solid-jose.trycloudflare.com/auth/callback",
+  "https://decent-recognize-solid-jose.trycloudflare.com/auth/shopify/callback",
+  "https://decent-recognize-solid-jose.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]

@@ -32,7 +32,16 @@ export default function App() {
         <Link to="/app/create-dashboard">Create dashboard</Link>
         <Link to="/app/VIP">VIP</Link>
         <Link to="/app/billing">Billing</Link>
+        <Link to="/app/zigslide">Slide</Link>
         <Link to="/app/testing">Testing</Link>
+
+        <Link to="/app/slide_settings">Settings page one</Link>
+        <Link to="/app/slide">Slide</Link>
+        <Link to="/app/create-survey">survey</Link>
+        <Link to="/app/create-dashboard">Create dashboard</Link>
+        <Link to="/app/create-settings">Create settings</Link>
+        <Link to="/app/design">Create design</Link>
+        <Link to="/app/zigpoll_settings">Zigpoll design</Link>
       </NavMenu>
       <Outlet />
     </AppProvider>
