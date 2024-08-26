@@ -196,6 +196,7 @@ export default function SlideDashboard() {
                         backgroundColor: '#cccccc',
                         display: 'flex',
                         alignItems: 'center',
+                        justifyContent: "center"
                       }}
                     />
                   </InlineStack>
